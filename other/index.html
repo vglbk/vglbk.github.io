@@ -1,0 +1,157 @@
+<html lang="ru" darkview="light">
+<!--
+(by TheOzziHouse)
+___________________
+а теперь моё:
+1101000 1110100 1110100 1110000 1110011 111010 101111 101111 1110110 1101011 101110 1100011 1101111 1101101 101111 1110100 1101000 1100101 1011111 1110100 1100101 1110011 1110100 1011111 110010
+-->
+<head>
+    <meta charset="UTF-8">
+    <title>Test page</title>
+    <style>
+      @import 'https://fonts.googleapis.com/css?family=Anonymous+Pro';
+      html,
+      body {
+        font-family: 'Anonymous Pro', monospace;
+        background: #000000;
+        height: 90%;
+      }
+      .container {
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+      }
+      .text {
+        font-weight: 100;
+        font-size: 28px;
+        color: #fafafa;
+        padding-bottom: 20px;
+      }
+      .dud {
+        color: #757575;
+      }
+    </style>
+<!--css--->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.4/jquery.fullPage.min.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
+<link rel="stylesheet" href="css\style.css">
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+</head>
+<body cz-shortcut-listen="true">
+    <div class="container">
+      <div class="text"><span class="dud">_</span>о не !<span class="dud">}</span><span class="dud">—</span><span class="dud">-</span>ня.</div>
+    </div>
+    <script>
+      class TextScramble {
+        constructor(el) {
+          this.el = el;
+          this.chars = '!@#$%^&*()-+~=_';
+          this.update = this.update.bind(this);
+        }
+        setText(newText) {
+          const oldText = this.el.innerText;
+          const length = Math.max(oldText.length, newText.length);
+          const promise = new Promise(resolve => this.resolve = resolve);
+          this.queue = [];
+          for (let i = 0; i < length; i++) {
+            const from = oldText[i] || '';
+            const to = newText[i] || '';
+            const start = Math.floor(Math.random() * 40);
+            const end = start + Math.floor(Math.random() * 40);
+            this.queue.push({ from, to, start, end });
+          }
+          cancelAnimationFrame(this.frameRequest);
+          this.frame = 0;
+          this.update();
+          return promise;
+        }
+        update() {
+          let output = '';
+          let complete = 0;
+          for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i];
+            if (this.frame >= end) {
+              complete++;
+              output += to;
+            } else if (this.frame >= start) {
+              if (!char || Math.random() < 0.28) {
+                char = this.randomChar();
+                this.queue[i].char = char;
+              }
+              output += `<span class="dud">${char}</span>`;
+            } else {
+              output += from;
+            }
+          }
+          this.el.innerHTML = output;
+          if (complete === this.queue.length) {
+            this.resolve();
+          } else {
+            this.frameRequest = requestAnimationFrame(this.update);
+            this.frame++;
+          }
+        }
+        randomChar() {
+          return this.chars[Math.floor(Math.random() * this.chars.length)];
+        }
+      }
+      const phrases = [
+      'Привет!',
+      'Тут ничего нет!',
+      'Возможно, тут что-то будет,',
+      'но это не точно,',
+      'Потом увидим.'];
+      const el = document.querySelector('.text');
+      const fx = new TextScramble(el);
+      let counter = 0;
+      const next = () => {
+        fx.setText(phrases[counter]).then(() => {
+          setTimeout(next, 800);
+        });
+        counter = (counter + 1) % phrases.length;
+      };
+      next();
+    </script>
+<script src="js\index.js"></script>
+
+
+     <ul class="buttons">
+    <li><a href="http://www.vktester.ml" target="_self">Главная cтраница</a></li>
+    <li><a href="https://vk.com/pycckoemope" target="_blank">ВКонтакте</a></li>
+    <li><a href="https://vk.com/app7031970" target="_blank">Приложение ВК</a></li>
+    <li><a href="https://vk.com/bugs" target="_blank">Баг-треккер</a></li>
+      </ul>
+--		
+<!--мейн--->
+  <container id="main">
+<!--0--->
+  <section>
+	<div id="particles-js"></div>
+    </section>
+	<!--1--->
+
+</container>
+<!--js--->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.4/jquery.fullPage.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="js\index.js"></script>
+
+--
+
+</body>
+  <div id="darkView">
+  </div>
+  <style>
+    html[darkView="dark"] #darkView { background: rgba(0, 0, 0, .5) !important; }
+  </style>
+</html>
